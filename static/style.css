@@ -1,0 +1,386 @@
+:root {
+  color-scheme: light;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #342d24;
+  background: #f6efdf;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+main {
+  width: min(760px, 100%);
+  margin: auto;
+  padding: 36px 24px 24px;
+}
+
+header {
+  text-align: center;
+}
+
+/* Typography */
+.scene-heading,
+.progress-label,
+.hint,
+.stages,
+.restart {
+  font-family: 'Courier New', monospace;
+}
+
+h1 {
+  font-size: clamp(44px, 8vw, 68px);
+  line-height: .98;
+  letter-spacing: -2px;
+  margin: 24px 0 28px;
+  font-weight: normal;
+}
+
+h1 span {
+  color: #a5412b;
+}
+
+/* Game container */
+.game {
+  border: 1px solid #d4c6ac;
+  background: #fffaf0;
+  box-shadow: 5px 5px 0 #e5dac5;
+}
+
+.scene-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Table */
+.table {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 67px,
+      #6f45282b 68px 70px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      #b9804c 0 3px,
+      #bc8753 3px 8px,
+      #ba8450 8px 34px
+    );
+  border-block: 4px solid #9a663c;
+}
+
+.runner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 9%;
+  width: 17%;
+  background: #a74230;
+  border-inline: 6px solid #e1bd80;
+  box-shadow: 4px 0 #79462744;
+}
+
+.runner::after {
+  content: '';
+  position: absolute;
+  inset: 0 10%;
+  border-inline: 3px dashed #e0b478;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0 19px,
+    #ce8b5970 19px 23px,
+    transparent 23px 42px
+  );
+}
+
+/* Dish */
+.dish-position {
+  position: absolute;
+  width: 54%;
+  left: 22%;
+  top: 8%;
+  aspect-ratio: 1.25;
+}
+
+.dish {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dish {
+  clip-path: polygon(
+    17.5% 10.9375%,
+    72.5% 10.9375%,
+    72.5% 14.8438%,
+    81.875% 14.8438%,
+    81.875% 21.875%,
+    88.125% 21.875%,
+    88.125% 32.0312%,
+    93.125% 32.0312%,
+    93.125% 59.375%,
+    88.125% 59.375%,
+    88.125% 72.6562%,
+    80% 72.6562%,
+    80% 82.0312%,
+    67.5% 82.0312%,
+    67.5% 86.7188%,
+    26.875% 86.7188%,
+    26.875% 82.0312%,
+    16.25% 82.0312%,
+    16.25% 75%,
+    9.375% 75%,
+    9.375% 63.2812%,
+    5.625% 63.2812%,
+    5.625% 38.2812%,
+    9.375% 38.2812%,
+    9.375% 25.7812%,
+    17.5% 25.7812%
+  );
+}
+
+.dish:active {
+  transform: scale(.96);
+}
+
+button:focus-visible {
+  outline: 3px solid #2c5147;
+  outline-offset: 5px;
+}
+
+.dish img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+.lavash {
+  filter: drop-shadow(4px 9px 0 #653f3040);
+}
+
+.ingredient,
+.wine {
+  animation: appear .3s ease-out;
+}
+
+.wine {
+  position: absolute;
+  width: 24%;
+  height: 72%;
+  right: 1%;
+  top: 8%;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* Game information */
+.game-info {
+  padding: 0 28px 20px;
+  text-align: center;
+}
+
+.message {
+  font-size: clamp(18px, 3.5vw, 24px);
+  margin: 23px 0;
+  min-height: 1.3em;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: #766a58;
+  text-align: left;
+}
+
+.progress-label strong {
+  color: #a5412b;
+}
+
+/* Progress bar */
+progress {
+  display: block;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  margin: 12px 0 18px;
+  border: 0;
+  background: #e9dfcd;
+  accent-color: #a5412b;
+}
+
+progress::-webkit-progress-bar {
+  background: #e9dfcd;
+}
+
+progress::-webkit-progress-value {
+  background: #a5412b;
+}
+
+progress::-moz-progress-bar {
+  background: #a5412b;
+}
+
+/* Hint and restart button */
+.hint {
+  color: #83755f;
+  font-size: 11px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.restart {
+  border: 1px solid #813621;
+  background: #a5412b;
+  color: #fffaf0;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #e3c6a4;
+  font-size: 12px;
+}
+
+.restart:hover {
+  background: #89351f;
+}
+
+/* Stages */
+.stages {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 26px 0;
+  color: #8b806c;
+  font-size: 11px;
+}
+
+.stages li {
+  padding-top: 10px;
+  border-top: 2px solid #dcd1bd;
+  flex: 1;
+}
+
+.stages span {
+  display: block;
+  font-size: 10px;
+  margin-bottom: 7px;
+}
+
+.stages .current {
+  color: #a5412b;
+  border-color: #a5412b;
+  font-weight: bold;
+}
+
+.stages .done {
+  color: #526649;
+  border-color: #83906a;
+}
+
+/* Animations */
+.dancing .dish-position,
+.dancing .wine {
+  animation: dance .65s ease-in-out infinite alternate;
+}
+
+.dancing .wine {
+  animation-delay: -.32s;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dance {
+  from {
+    transform: translateY(0) rotate(-3deg);
+  }
+
+  to {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 480px) {
+  main {
+    padding: 24px 16px;
+  }
+
+  .table {
+    aspect-ratio: 1.4;
+  }
+
+  .dish-position {
+    width: 66%;
+    left: 10%;
+    top: 19%;
+  }
+
+  .wine {
+    width: 27%;
+    top: 8%;
+    right: 0;
+  }
+
+  .game-info {
+    padding-inline: 16px;
+  }
+
+  .progress-label {
+    font-size: 11px;
+  }
+
+  .stages {
+    font-size: 10px;
+  }
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+
+  .dish:active {
+    transform: none;
+  }
+}
